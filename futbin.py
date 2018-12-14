@@ -5,10 +5,10 @@ import pandas as pd
 from bs4 import BeautifulSoup
 
 fifa = {
-    '15': 'FIFA15',
-    '16': 'FIFA16',
-    '17': 'FIFA17',
-    '18': 'FIFA18',
+    # '15': 'FIFA15',
+    # '16': 'FIFA16',
+    # '17': 'FIFA17',
+    # '18': 'FIFA18',
     '19': 'FIFA19'
 }
 
@@ -21,6 +21,7 @@ for key, value in fifa.items():
     TotalPages = str(bs.findAll('li', {'class': 'page-item '})[-1].text).strip()
     print('Number of pages to be parsed for FIFA ' + key + ' is ' + TotalPages + ' Pages')
     for page in range(1, int(TotalPages) + 1):
+        print(page)
         FutBin = requests.get('https://www.futbin.com/' + key + '/players?page=' + str(page), headers={'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36'})
         bs = BeautifulSoup(FutBin.text, 'html.parser')
         table = (bs.find('table', {'id': 'repTb'}))
